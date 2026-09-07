@@ -74,17 +74,17 @@ window.STATS = {
     {
       "teks": "udah makan?",
       "n": 151,
-      "ket": "kali kita mastiin yang lain nggak kelaparan"
+      "ket": "buat mastiin yang lain nggak kelaparan"
     },
     {
       "teks": "semangat",
       "n": 45,
-      "ket": "kali kita nyemangatin duluan"
+      "ket": "buat nyemangatin duluan"
     },
     {
       "teks": "hati-hati",
       "n": 30,
-      "ket": "kali kita nunggu yang lain nyampe"
+      "ket": "buat nungguin yang lain nyampe"
     },
     {
       "teks": "seng",
@@ -94,12 +94,12 @@ window.STATS = {
     {
       "teks": "wkwk",
       "n": 251,
-      "ket": "kali kita ketawa bareng"
+      "ket": "ketawa bareng"
     },
     {
       "teks": "kangen",
       "n": 22,
-      "ket": "kali kita ngaku duluan"
+      "ket": "buat ngaku duluan"
     }
   ]
 };

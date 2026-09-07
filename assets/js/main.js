@@ -101,12 +101,12 @@ function perjalanan() {
 function angkaKita() {
   const g = $("#statGrid");
   [
-    { mentah: S.totalPesan, l: `pesan dalam ${S.hariAktif} hari — rata-rata ${angka(S.rataPerHari)} tiap hari` },
+    { mentah: S.totalPesan, l: `pesan dalam ${S.hariAktif} hari, rata-rata ${angka(S.rataPerHari)} tiap hari` },
     { mentah: S.totalKata,  l: "kata. Kira-kira setebal novel tipis." },
-    { mentah: S.hariTeramai.jumlah, l: `pesan cuma di ${tgl(S.hariTeramai.tanggal)} — hari terpanjang kita` },
+    { mentah: S.hariTeramai.jumlah, l: `pesan cuma di ${tgl(S.hariTeramai.tanggal)}. Hari terpanjang kita.` },
     { n: S.palingMalam.jam, l: `pesan paling subuh, ${tgl(S.palingMalam.tanggal)}. Nggak ada yang mau berhenti duluan.` },
     { mentah: S.totalMedia, l: "foto & stiker yang dikirim tanpa alasan jelas" },
-    { n: `${S.jamTersibuk}.00`, l: "jam paling ramai. Jam istirahat, dan kita pilih ngobrol." },
+    { n: `${S.jamTersibuk}.00`, l: "jam paling ramai. Jam istirahat, dan kita malah ngobrol." },
   ].forEach((s, i) => {
     const d = el("div", "stat reveal");
     d.style.setProperty("--i", i);
@@ -118,7 +118,7 @@ function angkaKita() {
 
   const w = $("#frasa");
   S.frasa.forEach((f, i) => {
-    const k = el("div", "word pop", `<b>${angka(f.n)}×</b> <span>“${f.teks}” — ${f.ket}</span>`);
+    const k = el("div", "word pop", `<b>${angka(f.n)}×</b> <span>“${f.teks}”, ${f.ket}</span>`);
     k.style.setProperty("--i", i);
     w.append(k);
   });
@@ -128,12 +128,12 @@ function angkaKita() {
     const c = el("div", "hour" + (i === S.jamTersibuk ? " puncak" : ""));
     const b = el("i"); b.dataset.h = Math.max(2, Math.round(v / maks * 100)) + "%";
     b.style.transitionDelay = (i * 28) + "ms";
-    b.title = `${i}.00 — ${angka(v)} pesan`;
+    b.title = `${i}.00, ${angka(v)} pesan`;
     c.append(b, el("u", null, String(i).padStart(2, "0")));
     h.append(c);
   });
   $("#jamKet").textContent =
-    `Paling ramai jam ${S.jamTersibuk}.00 — ${angka(S.jam[S.jamTersibuk])} pesan. Sumbu bawah = jam 00 sampai 23.`;
+    `Paling ramai jam ${S.jamTersibuk}.00, ${angka(S.jam[S.jamTersibuk])} pesan. Sumbu bawah jam 00 sampai 23.`;
 
   $("#emoji").innerHTML = S.emojiTop
     .map((e, i) => `<div class="word pop" style="--i:${i}"><b>${e.e}</b> <span>${angka(e.n)}×</span></div>`).join("");
@@ -235,7 +235,7 @@ function ucapan() {
     }
     const d = el("div", "kartu-ucapan reveal");
     u.pesan.forEach(p => d.append(el("p", null, p)));
-    d.append(el("p", "dari", "— " + u.dari));
+    d.append(el("p", "dari", "dari " + u.dari));
     list.append(d);
   });
 }

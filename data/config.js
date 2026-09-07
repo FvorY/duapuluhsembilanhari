@@ -121,7 +121,7 @@ window.KITA = {
       "You shine, seng. And I'm still learning how to keep up. Tapi aku nggak ke mana-mana.",
       "Selamat ulang tahun. Makasih udah lahir. Makasih udah nyampe ke aku.",
     ],
-    ttd: "— dari aku",
+    ttd: "dari aku",
   },
 
   /* --- 5. HARAPAN (muncul setelah lilin ditiup) ------------------------ */
