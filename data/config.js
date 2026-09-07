@@ -112,14 +112,14 @@ window.KITA = {
   surat: {
     judul: "Surat kecil buat kamu",
     paragraf: [
-      "Kita ketemu waktu lagi capek-capeknya di gunung. Nggak ada yang sempet jaga image. Mungkin itu sebabnya aku gampang ngerasa aman sama kamu.",
+      "Kita ketemu waktu lagi capek-capeknya di gunung. Nggak ada yang sempet jaga image. Maybe that's why I felt safe around you so fast.",
       "Terus jam sebelas malam kamu kepencet nomorku, panik, terus nulis “damai”. Aku masih ketawa tiap inget itu.",
-      "{{hariAktif}} hari. {{totalPesan}} pesan. Nggak ada satu hari pun yang kosong.",
-      "Aku baru sadar pas ngitungin: kita hampir nggak pernah ngomong yang besar-besar. Yang diulang-ulang cuma “udah makan?”, {{n_udahmakan}} kali. Sisanya “hati-hati ya” sama “semangat”. Ternyata segitu doang, dan ternyata cukup.",
-      "Kamu cantik, dan itu justru bagian yang paling gampang buat disebut.",
-      "Yang susah dijelasin tuh: kamu bisa nyalain aku lagi pas aku lagi mati lampu. Kamu yang nyariin duluan pas aku milih diem. Kamu inget hal-hal kecil yang aku sendiri lupa.",
+      "{{hariAktif}} hari. {{totalPesan}} pesan. Not a single empty day.",
+      "Aku baru sadar pas ngitungin: kita hampir nggak pernah ngomong yang besar-besar. Yang diulang-ulang cuma “udah makan?”, {{n_udahmakan}} kali. Sisanya “hati-hati ya” sama “semangat”. Turns out that was it. And turns out that was enough.",
+      "Kamu cantik, and that's the easiest part to say.",
+      "Yang susah dijelasin tuh: kamu bisa nyalain aku lagi pas aku lagi mati lampu. Kamu yang nyariin duluan pas aku milih diem. You remember the small things I forget about myself.",
       "You shine, seng. And I'm still learning how to keep up. Tapi aku nggak ke mana-mana.",
-      "Selamat ulang tahun. Makasih udah lahir. Makasih udah nyampe ke aku.",
+      "Happy birthday, seng. Makasih udah lahir. Makasih udah nyampe ke aku.",
     ],
     ttd: "dari aku",
   },
@@ -127,7 +127,7 @@ window.KITA = {
   /* --- 5. HARAPAN (muncul setelah lilin ditiup) ------------------------ */
   harapan: {
     judul: "Sebelum lilinnya mati",
-    kalimat: "Semoga tahun ini kamu lebih banyak ketawanya, lebih dikit overthinking-nya. Dan semoga aku masih yang nanyain kamu udah makan atau belum.",
+    kalimat: "Semoga tahun ini ketawanya lebih banyak, overthinking-nya lebih dikit. And I hope I'm still the one asking, udah makan belum?",
   },
 
   /* --- 6. LAGU (opsional) ----------------------------------------------
