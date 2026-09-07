@@ -6,6 +6,18 @@ const $ = (s, r = document) => r.querySelector(s);
 let mulaiMusik = () => {};   // diisi oleh musik(), dipicu tombol "Buka"
 const el = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
 const angka = n => n.toLocaleString("id-ID");
+const kurangiGerak = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function naikkanAngka(node, target, durasi = 1500) {   // angka berjalan naik
+  if (kurangiGerak) { node.textContent = angka(target); return; }
+  const t0 = performance.now();
+  const langkah = t => {
+    const p = Math.min(1, (t - t0) / durasi);
+    node.textContent = angka(Math.round(target * (1 - Math.pow(1 - p, 3))));
+    if (p < 1) requestAnimationFrame(langkah);
+  };
+  requestAnimationFrame(langkah);
+}
 const BULAN = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
 const tgl = iso => { const d = new Date(iso + "T00:00:00"); return `${d.getDate()} ${BULAN[d.getMonth()]}`; };
 
@@ -45,14 +57,17 @@ function penghitung() {
   const hariH = kini.getMonth() === ul.getMonth() && kini.getDate() === ul.getDate();
 
   const sel = [
-    { n: angka(S.totalPesan), l: "pesan terkirim" },
-    { n: S.hariAktif, l: S.tanpaBolong ? "hari tanpa satu pun bolong" : "hari kita ngobrol" },
-    { n: angka(S.totalKata),  l: "kata yang kita tulis" },
+    { n: angka(S.totalPesan), mentah: S.totalPesan, l: "pesan terkirim" },
+    { n: S.hariAktif, mentah: S.hariAktif, l: S.tanpaBolong ? "hari tanpa satu pun bolong" : "hari kita ngobrol" },
+    { n: angka(S.totalKata), mentah: S.totalKata, l: "kata yang kita tulis" },
   ];
   const g = $("#counterGrid");
-  sel.forEach(c => {
+  sel.forEach((c, i) => {
     const d = el("div", "count-cell");
-    d.append(el("div", "count-num", c.n), el("div", "count-lbl", c.l));
+    d.style.setProperty("--i", i);
+    const n = el("div", "count-num", c.mentah != null ? "0" : c.n);
+    if (c.mentah != null) n.dataset.angka = c.mentah;
+    d.append(n, el("div", "count-lbl", c.l));
     g.append(d);
   });
   if (hariH) document.body.dataset.hariH = "1";
@@ -86,25 +101,33 @@ function perjalanan() {
 function angkaKita() {
   const g = $("#statGrid");
   [
-    { n: angka(S.totalPesan), l: `pesan dalam ${S.hariAktif} hari — rata-rata ${angka(S.rataPerHari)} tiap hari` },
-    { n: angka(S.totalKata),  l: "kata. Kira-kira setebal novel tipis." },
-    { n: angka(S.hariTeramai.jumlah), l: `pesan cuma di ${tgl(S.hariTeramai.tanggal)} — hari terpanjang kita` },
-    { n: S.palingMalam.jam,   l: `pesan paling subuh, ${tgl(S.palingMalam.tanggal)}. Nggak ada yang mau berhenti duluan.` },
-    { n: angka(S.totalMedia), l: "foto & stiker yang dikirim tanpa alasan jelas" },
+    { mentah: S.totalPesan, l: `pesan dalam ${S.hariAktif} hari — rata-rata ${angka(S.rataPerHari)} tiap hari` },
+    { mentah: S.totalKata,  l: "kata. Kira-kira setebal novel tipis." },
+    { mentah: S.hariTeramai.jumlah, l: `pesan cuma di ${tgl(S.hariTeramai.tanggal)} — hari terpanjang kita` },
+    { n: S.palingMalam.jam, l: `pesan paling subuh, ${tgl(S.palingMalam.tanggal)}. Nggak ada yang mau berhenti duluan.` },
+    { mentah: S.totalMedia, l: "foto & stiker yang dikirim tanpa alasan jelas" },
     { n: `${S.jamTersibuk}.00`, l: "jam paling ramai. Jam istirahat, dan kita pilih ngobrol." },
-  ].forEach(s => {
+  ].forEach((s, i) => {
     const d = el("div", "stat reveal");
-    d.append(el("div", "stat-num", s.n), el("div", "stat-lbl", s.l));
+    d.style.setProperty("--i", i);
+    const n = el("div", "stat-num", s.mentah != null ? "0" : s.n);
+    if (s.mentah != null) n.dataset.angka = s.mentah;
+    d.append(n, el("div", "stat-lbl", s.l));
     g.append(d);
   });
 
   const w = $("#frasa");
-  S.frasa.forEach(f => w.append(el("div", "word", `<b>${angka(f.n)}×</b> <span>“${f.teks}” — ${f.ket}</span>`)));
+  S.frasa.forEach((f, i) => {
+    const k = el("div", "word pop", `<b>${angka(f.n)}×</b> <span>“${f.teks}” — ${f.ket}</span>`);
+    k.style.setProperty("--i", i);
+    w.append(k);
+  });
 
   const maks = Math.max(...S.jam), h = $("#jam");
   S.jam.forEach((v, i) => {
     const c = el("div", "hour" + (i === S.jamTersibuk ? " puncak" : ""));
     const b = el("i"); b.dataset.h = Math.max(2, Math.round(v / maks * 100)) + "%";
+    b.style.transitionDelay = (i * 28) + "ms";
     b.title = `${i}.00 — ${angka(v)} pesan`;
     c.append(b, el("u", null, String(i).padStart(2, "0")));
     h.append(c);
@@ -113,7 +136,7 @@ function angkaKita() {
     `Paling ramai jam ${S.jamTersibuk}.00 — ${angka(S.jam[S.jamTersibuk])} pesan. Sumbu bawah = jam 00 sampai 23.`;
 
   $("#emoji").innerHTML = S.emojiTop
-    .map(e => `<div class="word"><b>${e.e}</b> <span>${angka(e.n)}×</span></div>`).join("");
+    .map((e, i) => `<div class="word pop" style="--i:${i}"><b>${e.e}</b> <span>${angka(e.n)}×</span></div>`).join("");
 }
 
 /* ================= KARAKTER (avatar SVG) ================= */
@@ -197,7 +220,8 @@ function ucapan() {
   const tengah = Math.floor((orang.length - 1) / 2);
   orang.forEach((o, i) => {
     const kelas = (i === tengah ? "tengah " : "") + (o.utama ? "utama" : "");
-    const fig = el("figure", kelas.trim() || null, avatar(o.rupa, i));
+    const fig = el("figure", (kelas.trim() + " masuk").trim(), avatar(o.rupa, i));
+    fig.style.setProperty("--i", i);
     fig.append(el("figcaption", null, o.nama));
     g.append(fig);
   });
@@ -238,9 +262,41 @@ function lilin() {
     setTimeout(() => {
       $("#wish").classList.add("on");
       $("#tiup").textContent = "selamat ulang tahun 💜";
-      confetti();
+      confetti(); balon();
     }, api.length * 190 + 260);
   });
+}
+
+function balon() {
+  if (kurangiGerak) return;
+  const c = $("#confetti"), x = c.getContext("2d");
+  c.width = innerWidth; c.height = innerHeight;
+  const warna = ["#38BDF8", "#7DD3FC", "#A78BFA", "#F472B6", "#BAE6FD"];
+  const bs = Array.from({ length: 14 }, () => ({
+    x: Math.random() * innerWidth, y: innerHeight + 40 + Math.random() * 260,
+    r: 15 + Math.random() * 13, v: 1.1 + Math.random() * 1.5,
+    f: Math.random() * 6.3, a: .5 + Math.random() * .35,
+    c: warna[(Math.random() * warna.length) | 0],
+  }));
+  (function loop() {
+    let hidup = false;
+    bs.forEach(o => {
+      o.y -= o.v; o.f += .022;
+      if (o.y > -70) {
+        hidup = true;
+        const px = o.x + Math.sin(o.f) * 22;
+        x.globalAlpha = o.a;
+        x.strokeStyle = "rgba(255,255,255,.28)"; x.lineWidth = 1;
+        x.beginPath(); x.moveTo(px, o.y + o.r);
+        x.quadraticCurveTo(px + 7, o.y + o.r + 20, px, o.y + o.r + 38); x.stroke();
+        x.fillStyle = o.c;
+        x.beginPath(); x.ellipse(px, o.y, o.r * .84, o.r, 0, 0, 6.284); x.fill();
+        x.globalAlpha = o.a * .45; x.fillStyle = "#FFFFFF";
+        x.beginPath(); x.ellipse(px - o.r * .3, o.y - o.r * .35, o.r * .17, o.r * .26, -.4, 0, 6.284); x.fill();
+      }
+    });
+    if (hidup) requestAnimationFrame(loop);
+  })();
 }
 
 function confetti() {
@@ -288,6 +344,8 @@ function bintang() {
     }));
   };
   set(); addEventListener("resize", set);
+
+  let jatuh = null, nanti = 90;                 // bintang jatuh sesekali
   (function loop() {
     x.clearRect(0, 0, c.width, c.height);
     b.forEach(o => {
@@ -296,6 +354,25 @@ function bintang() {
       x.fillStyle = o.c;
       x.beginPath(); x.arc(o.x, o.y, o.r, 0, 6.284); x.fill();
     });
+
+    if (!jatuh && --nanti < 0) {
+      jatuh = { x: Math.random() * c.width * .7, y: Math.random() * c.height * .35,
+                v: 7 + Math.random() * 4, umur: 0 };
+      nanti = 420 + Math.random() * 500;
+    }
+    if (jatuh) {
+      jatuh.umur++;
+      jatuh.x += jatuh.v; jatuh.y += jatuh.v * .45;
+      const p = 1 - jatuh.umur / 55;
+      if (p <= 0) { jatuh = null; }
+      else {
+        const g = x.createLinearGradient(jatuh.x, jatuh.y, jatuh.x - 90, jatuh.y - 40);
+        g.addColorStop(0, `rgba(255,255,255,${p})`);
+        g.addColorStop(1, "rgba(255,255,255,0)");
+        x.globalAlpha = 1; x.strokeStyle = g; x.lineWidth = 2; x.lineCap = "round";
+        x.beginPath(); x.moveTo(jatuh.x, jatuh.y); x.lineTo(jatuh.x - 90, jatuh.y - 40); x.stroke();
+      }
+    }
     requestAnimationFrame(loop);
   })();
 }
@@ -322,6 +399,8 @@ function reveal() {
     e.target.classList.add("tampil");
     e.target.querySelectorAll("[data-w]").forEach(b => b.style.width = b.dataset.w);
     e.target.querySelectorAll("[data-h]").forEach(b => b.style.height = b.dataset.h);
+    e.target.querySelectorAll("[data-angka]").forEach((n, k) =>
+      setTimeout(() => naikkanAngka(n, +n.dataset.angka), 180 + k * 130));
     io.unobserve(e.target);
   }), { threshold: .16, rootMargin: "0px 0px -8% 0px" });
   document.querySelectorAll(".reveal").forEach(n => io.observe(n));
@@ -402,10 +481,13 @@ function gerbang() {
     g.classList.add("buka");
     mulaiMusik();                                  // klik ini = izin suara dari browser
     setTimeout(() => g.classList.add("pergi"), 820);
+    setTimeout(confetti, 1150);                    // sambutan begitu halaman terbuka
+    document.body.classList.add("terbuka");        // picu masuknya isi hero
     setTimeout(() => {
       g.remove();
       document.body.style.overflow = "";
       scrollTo(0, 0);
+      reveal();                                    // baru sekarang animasi masuk dihitung
       if (document.body.dataset.hariH) confetti();
     }, 1700);
   };
@@ -418,7 +500,8 @@ function gerbang() {
 /* ================= JALAN ================= */
 document.addEventListener("DOMContentLoaded", () => {
   hero(); penghitung(); perjalanan(); angkaKita(); ucapan(); statis();
-  lilin(); bintang(); paralaks(); reveal(); nav();
+  lilin(); bintang(); paralaks(); nav();
   musik(); gerbang();
+  if (!$("#gerbang")) reveal();      // tanpa gerbang: langsung amati
 });
 })();
