@@ -128,6 +128,6 @@ window.KITA = {
   },
 
   /* --- 6. LAGU (opsional) ----------------------------------------------
-     Taruh assets/audio/lagu.mp3 — tombol putar muncul sendiri.     */
-  lagu: "assets/audio/lagu.mp3?v=a4cadf14",
+     Taruh assets/audio/lagu.m4a — tombol putar muncul sendiri.     */
+  lagu: "assets/audio/lagu.m4a?v=1e35118b",
 };
