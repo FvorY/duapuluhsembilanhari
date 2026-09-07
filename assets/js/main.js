@@ -109,12 +109,14 @@ function angkaKita() {
 
   const maks = Math.max(...S.jam), h = $("#jam");
   S.jam.forEach((v, i) => {
-    const c = el("div", "hour");
+    const c = el("div", "hour" + (i === S.jamTersibuk ? " puncak" : ""));
     const b = el("i"); b.dataset.h = Math.max(2, Math.round(v / maks * 100)) + "%";
     b.title = `${i}.00 — ${angka(v)} pesan`;
-    c.append(b, el("u", null, i % 3 === 0 ? i : ""));
+    c.append(b, el("u", null, String(i).padStart(2, "0")));
     h.append(c);
   });
+  $("#jamKet").textContent =
+    `Paling ramai jam ${S.jamTersibuk}.00 — ${angka(S.jam[S.jamTersibuk])} pesan. Sumbu bawah = jam 00 sampai 23.`;
 
   $("#emoji").innerHTML = S.emojiTop
     .map(e => `<div class="word"><b>${e.e}</b> <span>${angka(e.n)}×</span></div>`).join("");
