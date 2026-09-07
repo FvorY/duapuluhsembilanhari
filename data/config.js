@@ -91,7 +91,19 @@ window.KITA = {
           "Jangan lupa tobat yah, lopyu 🤍",
         ],
       },
-      { dari: "Siska", menyusul: true },
+      {
+        dari: "Siska",
+        pesan: [
+          "Happy Birthday Cintaa❤️",
+          "Cewe baikk, tuluss, ceria, seruuu bgt yg pernah aku kenall, atau bisa dibilang kembaranku yg superr kusayangg☺️🫶🏻",
+          "Semoga bertambah umur kamu semakin bijak, makin bahagia, banyak impianmu yg tercapai, dikelilingi hal baik, dan jadi manusia yg lebih baik tentunyaa💕",
+          "I know you have a soft heart, meskipun juga bar bar kalau ngomell hahaa. But, your empathy as a human make me so amaze with u girl, u are kind person🤍",
+          "makasiii yaa udah mau jadi temenku, dan skrg jadi sahabat nadikuuu ahahaa🕺",
+          "semogaa kita selalu bersahabat baik teruss dan holidayyy trs yuhuww!",
+          "nice to meet u cintaaa🥰",
+          "God bless u🤍",
+        ],
+      },
     ],
   },
 

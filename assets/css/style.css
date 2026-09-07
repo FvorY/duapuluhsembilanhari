@@ -426,7 +426,8 @@ footer .hati{color:var(--pink); font-size:17px; display:block; margin-bottom:14p
 .geng figure.utama{width:clamp(112px,17.5vw,172px)}
 .geng figure.utama .tokoh{filter:drop-shadow(0 16px 30px rgba(0,0,0,.42)) drop-shadow(0 0 26px rgba(56,189,248,.38))}
 .geng figure.utama figcaption{color:var(--biru); font-weight:500}
-.ucapan-list{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:16px; margin-top:34px}
+.ucapan-list{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+  gap:16px; margin-top:34px; align-items:start}   /* tiap kartu setinggi isinya */
 .kartu-ucapan{
   background:var(--bg-2); border:1px solid var(--line-soft); border-radius:var(--r);
   padding:30px 32px 26px; position:relative;
