@@ -73,7 +73,8 @@ window.KITA = {
     // poni: "samping" | "rata" | "belah".  kacamata: null | "bulat" | "kotak"
     // motif: "polos" | "garis" | "denim"
     orang: [
-      { nama: "Cinta", rupa: { kulit: "#F0CDB6", rambut: "#5A3C2A", poni: "belah",
+      // utama: true = yang ulang tahun. Otomatis ditaruh di tengah & ditonjolkan.
+      { nama: "Cinta", utama: true, rupa: { kulit: "#F0CDB6", rambut: "#5A3C2A", poni: "belah",
           kacamata: null,    baju: "#7FA9D6", motif: "denim", jepit: "#F6C9DC" } },
       { nama: "Siska", rupa: { kulit: "#EFC9AE", rambut: "#3D2A20", poni: "rata",
           kacamata: "bulat", baju: "#EDEAF2", motif: "garis", garis2: "#22222B", pita: "#E8B9CF" } },

@@ -191,8 +191,13 @@ function ucapan() {
   $("#ucapanLead").textContent  = U.pengantar;
 
   const g = $("#geng");
-  (U.orang || []).forEach((o, i) => {
-    const fig = el("figure", i === 1 ? "tengah" : null, avatar(o.rupa, i));
+  const orang = [...(U.orang || [])];
+  const iU = orang.findIndex(o => o.utama);
+  if (iU > -1) orang.splice(Math.floor((orang.length - 1) / 2), 0, ...orang.splice(iU, 1));
+  const tengah = Math.floor((orang.length - 1) / 2);
+  orang.forEach((o, i) => {
+    const kelas = (i === tengah ? "tengah " : "") + (o.utama ? "utama" : "");
+    const fig = el("figure", kelas.trim() || null, avatar(o.rupa, i));
     fig.append(el("figcaption", null, o.nama));
     g.append(fig);
   });
