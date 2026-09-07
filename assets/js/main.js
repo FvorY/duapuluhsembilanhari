@@ -40,20 +40,14 @@ function hero() {
 }
 
 function penghitung() {
-  const jadian = new Date(K.jadian + "T00:00:00");
-  const hari = Math.floor((Date.now() - jadian) / 864e5) + 1;
   const kini = new Date();
   const ul = new Date(K.dia.ulangTahun + "T00:00:00");
   const hariH = kini.getMonth() === ul.getMonth() && kini.getDate() === ul.getDate();
-  let sisa = Math.ceil((ul - new Date(kini.getFullYear(), kini.getMonth(), kini.getDate())) / 864e5);
-  if (sisa < 0) sisa += 365;
 
   const sel = [
-    { n: angka(hari),           l: "hari jadi kita" },
-    { n: angka(S.totalPesan),   l: "pesan terkirim" },
-    { n: S.hariAktif,           l: S.tanpaBolong ? "hari tanpa satu pun bolong" : "hari kita ngobrol" },
-    hariH ? { n: "🎂", l: "hari ini ulang tahun kamu" }
-          : { n: sisa, l: sisa === 1 ? "hari lagi menuju 9 September" : "hari lagi menuju hari kamu" },
+    { n: angka(S.totalPesan), l: "pesan terkirim" },
+    { n: S.hariAktif, l: S.tanpaBolong ? "hari tanpa satu pun bolong" : "hari kita ngobrol" },
+    { n: angka(S.totalKata),  l: "kata yang kita tulis" },
   ];
   const g = $("#counterGrid");
   sel.forEach(c => {
