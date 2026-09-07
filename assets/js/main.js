@@ -476,7 +476,7 @@ function musik() {
   }
 
   mulaiMusik = mulai;
-  a.addEventListener("canplaythrough", () => b.classList.add("ada"), { once: true });
+  a.addEventListener("canplay", () => b.classList.add("ada"), { once: true });
   a.addEventListener("loadeddata", mulai, { once: true });   // percobaan autoplay
   GERAK.forEach(e => addEventListener(e, pemicu, { passive: true }));
 
