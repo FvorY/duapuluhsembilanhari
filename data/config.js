@@ -114,8 +114,9 @@ window.KITA = {
     paragraf: [
       "Kita ketemu di tempat yang nggak biasa — di jalur pendakian, waktu kita sama-sama capek dan nggak ada yang sempat jaga image. Terus kamu kepencet nomorku jam sebelas malam, panik, dan bilang “damai”. Aku masih ketawa tiap inget itu.",
       "{{hariAktif}} hari, {{totalPesan}} pesan, dan nggak ada satu hari pun yang bolong. Aku baru sadar pas ngitungnya: bahasa cinta kita ternyata sederhana banget. “Udah makan?” {{n_udahmakan}} kali. “Hati-hati ya.” {{n_hatihati}} kali. “Semangat.” {{n_semangat}} kali. Kita nggak pernah bilang hal-hal besar. Kita cuma mastiin satu sama lain nggak kelaparan dan nyampe rumah.",
-      "Kamu cantik, kamu baik, kamu ceria — dan itu udah kelihatan dari jauh sebelum kita jadian. Tapi yang paling aku syukurin justru bukan itu.",
-      "Kamu orang yang bisa nyalain lagi aku waktu aku lagi padam. Kamu yang aktif nyariin aku duluan waktu aku milih diem. Kamu peduli sampai ke hal-hal kecil yang orang lain nggak akan kepikiran. Kadang aku ngerasa susah ngimbangin gemerlap cahaya kamu yang seindah itu — tapi aku nggak mau berhenti nyoba, dan aku bersyukur banget dikasih tempat sedeket ini.",
+      "Kamu cantik, dan itu justru bagian yang paling gampang buat disebut.",
+      "Yang susah dijelasin tuh: kamu bisa nyalain aku lagi pas aku lagi mati lampu. Kamu yang nyariin duluan pas aku milih diem. Kamu inget hal-hal kecil yang aku sendiri lupa.",
+      "You shine, seng. And I'm still learning how to keep up. Tapi aku nggak ke mana-mana.",
       "Selamat ulang tahun, seng. Terima kasih udah lahir, dan udah nyasar ke jalur pendakian yang sama denganku.",
     ],
     ttd: "— dari aku",
