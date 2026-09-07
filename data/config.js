@@ -22,43 +22,43 @@ window.KITA = {
     {
       tanggal: "Sebelum semuanya",
       judul: "Di jalur pendakian",
-      cerita: "Kita ketemu waktu napas sama-sama berantakan dan nggak ada yang sempat pura-pura keren. Mungkin itu alasannya kenapa aku ngerasa aman sama kamu dari awal — versi pertama kamu yang aku lihat adalah versi yang paling jujur.",
+      cerita: "Ketemu kamu pas napas lagi berantakan-berantakannya. Nggak ada yang sempet jaga image. Mungkin itu sebabnya aku gampang ngerasa aman sama kamu.",
       foto: "gunung.jpg", ikon: "gunung",
     },
     {
       tanggal: "10 Agustus, 22:41",
       judul: "“SUMPAH. MAU NGE SAVE NOMER. KEPENCET.”",
-      cerita: "Empat pesan pertama kita di WhatsApp, dan semuanya huruf kapital. Kamu cuma mau nyimpen nomor, terus kepencet, terus panik, terus bilang “damai”. Kalau itu kecelakaan, itu kecelakaan paling bagus yang pernah kejadian ke aku.",
+      cerita: "Empat pesan pertama kita, semuanya huruf gede. Kamu cuma mau nyimpen nomor, malah kepencet, terus panik, terus nulis “damai”. Sampai sekarang aku masih ketawa.",
       foto: "dm.jpg", ikon: "chat",
     },
     {
       tanggal: "11 Agustus",
       judul: "{{teramai}} pesan dalam satu hari",
-      cerita: "Sehari setelah nomor kepencet itu, kita ngirim {{teramai}} pesan. Sembilan ratus tiga belas. Sejak hari itu nggak pernah ada satu hari pun yang kita lewat tanpa ngobrol.",
+      cerita: "Sehari setelah nomor kepencet itu. Dan sejak hari itu belum pernah ada satu hari pun yang kosong.",
       ikon: "petir",
     },
     {
       tanggal: "13 Agustus, 05:59",
-      judul: "Ngobrol sampai matahari nyaingin",
-      cerita: "Pesan kamu masuk jam {{jamMalam}} pagi. Kita berdua tahu harus tidur, dan kita berdua tetap nggak mau duluan berhenti.",
+      judul: "Jam segini masih ngobrol",
+      cerita: "Pesan kamu masuk jam {{jamMalam}} pagi. Padahal dua-duanya besok kerja. Nggak ada yang mau nutup duluan.",
       ikon: "bulan",
     },
     {
       tanggal: "22 Agustus",
       judul: "Surabaya. Akhirnya punya nama.",
-      cerita: "Sepanjang pagi kita sibuk ngatur rencana ketemu — kamu mendadak disuruh ngurus kerjaan, aku udah duluan di jalan. Siangnya kamu bilang “take careeee”, aku bilang “kamu juga hati hati yaaa”. Malamnya semuanya berhenti jadi “kita apa ya?” dan mulai jadi “kita”.",
+      cerita: "Paginya kita sibuk ngatur ketemu. Kamu mendadak disuruh ngurus kerjaan, aku udah di jalan duluan. Siangnya kamu nulis “take careeee”. Malamnya udah nggak perlu nanya “kita apa ya”.",
       foto: "jadian.jpg", ikon: "hati", sorot: true,
     },
     {
       tanggal: "24 Agustus",
       judul: "Hari “seng” lahir",
-      cerita: "Awalnya aku manggil kamu kakak. Terus cinta. Terus sayang. Terus, entah dari mana, jadi “seng” — dan nempel. Sampai hari ini udah {{n_seng}} kali kita nyebut itu.",
+      cerita: "Awalnya kakak. Terus cinta. Terus sayang. Terus entah gimana jadi “seng”, dan nempel sampai sekarang. {{n_seng}} kali.",
       ikon: "bintang",
     },
     {
       tanggal: "9 September",
       judul: "Hari kamu",
-      cerita: "Dan hari ini aku cuma mau kamu tahu satu hal: dari {{hariAktif}} hari yang udah kita lewatin, nggak ada satu pun yang aku mau tukar.",
+      cerita: "Hari ini punya kamu. Dan kalau boleh milih ulang {{hariAktif}} hari kemarin, aku bakal milih yang sama.",
       foto: "sekarang.jpg", ikon: "kue",
     },
   ],
@@ -112,12 +112,14 @@ window.KITA = {
   surat: {
     judul: "Surat kecil buat kamu",
     paragraf: [
-      "Kita ketemu di tempat yang nggak biasa — di jalur pendakian, waktu kita sama-sama capek dan nggak ada yang sempat jaga image. Terus kamu kepencet nomorku jam sebelas malam, panik, dan bilang “damai”. Aku masih ketawa tiap inget itu.",
-      "{{hariAktif}} hari, {{totalPesan}} pesan, dan nggak ada satu hari pun yang bolong. Aku baru sadar pas ngitungnya: bahasa cinta kita ternyata sederhana banget. “Udah makan?” {{n_udahmakan}} kali. “Hati-hati ya.” {{n_hatihati}} kali. “Semangat.” {{n_semangat}} kali. Kita nggak pernah bilang hal-hal besar. Kita cuma mastiin satu sama lain nggak kelaparan dan nyampe rumah.",
+      "Kita ketemu waktu lagi capek-capeknya di gunung. Nggak ada yang sempet jaga image. Mungkin itu sebabnya aku gampang ngerasa aman sama kamu.",
+      "Terus jam sebelas malam kamu kepencet nomorku, panik, terus nulis “damai”. Aku masih ketawa tiap inget itu.",
+      "{{hariAktif}} hari. {{totalPesan}} pesan. Nggak ada satu hari pun yang kosong.",
+      "Aku baru sadar pas ngitungin: kita hampir nggak pernah ngomong yang besar-besar. Yang diulang-ulang cuma “udah makan?”, {{n_udahmakan}} kali. Sisanya “hati-hati ya” sama “semangat”. Ternyata segitu doang, dan ternyata cukup.",
       "Kamu cantik, dan itu justru bagian yang paling gampang buat disebut.",
       "Yang susah dijelasin tuh: kamu bisa nyalain aku lagi pas aku lagi mati lampu. Kamu yang nyariin duluan pas aku milih diem. Kamu inget hal-hal kecil yang aku sendiri lupa.",
       "You shine, seng. And I'm still learning how to keep up. Tapi aku nggak ke mana-mana.",
-      "Selamat ulang tahun, seng. Terima kasih udah lahir, dan udah nyasar ke jalur pendakian yang sama denganku.",
+      "Selamat ulang tahun. Makasih udah lahir. Makasih udah nyampe ke aku.",
     ],
     ttd: "— dari aku",
   },
@@ -125,10 +127,10 @@ window.KITA = {
   /* --- 5. HARAPAN (muncul setelah lilin ditiup) ------------------------ */
   harapan: {
     judul: "Sebelum lilinnya mati",
-    kalimat: "Semoga tahun ini kamu dapat lebih banyak hal yang bikin kamu ketawa lepas, lebih sedikit hal yang bikin kamu overthinking, dan tetap ada aku yang nanyain “udah makan?” tiap hari.",
+    kalimat: "Semoga tahun ini kamu lebih banyak ketawanya, lebih dikit overthinking-nya. Dan semoga aku masih yang nanyain kamu udah makan atau belum.",
   },
 
   /* --- 6. LAGU (opsional) ----------------------------------------------
      Taruh assets/audio/lagu.m4a — tombol putar muncul sendiri.     */
-  lagu: "assets/audio/lagu.m4a?v=d2a011df",
+  lagu: "assets/audio/lagu.m4a?v=1fb6bad3",
 };
