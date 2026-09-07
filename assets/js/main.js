@@ -267,66 +267,87 @@ function lilin() {
   });
 }
 
+/* ---- satu kanvas, satu loop: confetti + balon dipakai bersama ---- */
+let _kanvas = null, _ctx = null, _dpr = 1;
+let _confetti = [], _balon = [], _jalan = false;
+
+function siapkanKanvas() {
+  if (_kanvas) return;
+  _kanvas = $("#confetti");
+  _ctx = _kanvas.getContext("2d");
+  const ukur = () => {
+    _dpr = Math.min(2, devicePixelRatio || 1);
+    _kanvas.width = Math.round(innerWidth * _dpr);
+    _kanvas.height = Math.round(innerHeight * _dpr);
+    _ctx.setTransform(_dpr, 0, 0, _dpr, 0, 0);
+  };
+  ukur();
+  addEventListener("resize", ukur);
+}
+
+function mulaiLoop() {
+  if (_jalan) return;
+  _jalan = true;
+  requestAnimationFrame(gambarSemua);
+}
+
+function gambarSemua() {
+  const x = _ctx, W = innerWidth, H = innerHeight;
+  x.clearRect(0, 0, W, H);                      // <- ini yang dulu hilang di balon
+
+  _balon = _balon.filter(o => {
+    o.y -= o.v; o.f += .022;
+    if (o.y < -70) return false;
+    const px = o.x + Math.sin(o.f) * 20;
+    x.globalAlpha = o.a;
+    x.strokeStyle = "rgba(255,255,255,.3)"; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(px, o.y + o.r);
+    x.quadraticCurveTo(px + 6, o.y + o.r + 18, px, o.y + o.r + 34); x.stroke();
+    x.fillStyle = o.c;
+    x.beginPath(); x.ellipse(px, o.y, o.r * .82, o.r, 0, 0, 6.284); x.fill();
+    x.globalAlpha = o.a * .5; x.fillStyle = "#FFFFFF";
+    x.beginPath(); x.ellipse(px - o.r * .3, o.y - o.r * .34, o.r * .16, o.r * .24, -.4, 0, 6.284); x.fill();
+    return true;
+  });
+
+  _confetti = _confetti.filter(o => {
+    o.vy += .34; o.x += o.vx; o.y += o.vy; o.r += o.vr; o.umur++;
+    if (o.umur > 90) o.a -= .016;
+    if (o.a <= 0 || o.y > H + 60) return false;
+    x.save(); x.globalAlpha = Math.max(0, o.a); x.translate(o.x, o.y); x.rotate(o.r);
+    x.fillStyle = o.c; x.fillRect(-o.s / 2, -o.s / 2, o.s, o.s * .62); x.restore();
+    return true;
+  });
+
+  x.globalAlpha = 1;
+  if (_balon.length || _confetti.length) requestAnimationFrame(gambarSemua);
+  else { x.clearRect(0, 0, W, H); _jalan = false; }
+}
+
 function balon() {
   if (kurangiGerak) return;
-  const c = $("#confetti"), x = c.getContext("2d");
-  c.width = innerWidth; c.height = innerHeight;
+  siapkanKanvas();
   const warna = ["#38BDF8", "#7DD3FC", "#A78BFA", "#F472B6", "#BAE6FD"];
-  const bs = Array.from({ length: 14 }, () => ({
+  for (let i = 0; i < 14; i++) _balon.push({
     x: Math.random() * innerWidth, y: innerHeight + 40 + Math.random() * 260,
     r: 15 + Math.random() * 13, v: 1.1 + Math.random() * 1.5,
-    f: Math.random() * 6.3, a: .5 + Math.random() * .35,
+    f: Math.random() * 6.3, a: .55 + Math.random() * .3,
     c: warna[(Math.random() * warna.length) | 0],
-  }));
-  (function loop() {
-    let hidup = false;
-    bs.forEach(o => {
-      o.y -= o.v; o.f += .022;
-      if (o.y > -70) {
-        hidup = true;
-        const px = o.x + Math.sin(o.f) * 22;
-        x.globalAlpha = o.a;
-        x.strokeStyle = "rgba(255,255,255,.28)"; x.lineWidth = 1;
-        x.beginPath(); x.moveTo(px, o.y + o.r);
-        x.quadraticCurveTo(px + 7, o.y + o.r + 20, px, o.y + o.r + 38); x.stroke();
-        x.fillStyle = o.c;
-        x.beginPath(); x.ellipse(px, o.y, o.r * .84, o.r, 0, 0, 6.284); x.fill();
-        x.globalAlpha = o.a * .45; x.fillStyle = "#FFFFFF";
-        x.beginPath(); x.ellipse(px - o.r * .3, o.y - o.r * .35, o.r * .17, o.r * .26, -.4, 0, 6.284); x.fill();
-      }
-    });
-    if (hidup) requestAnimationFrame(loop);
-  })();
+  });
+  mulaiLoop();
 }
 
 function confetti() {
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const c = $("#confetti"), x = c.getContext("2d");
-  const W = () => { c.width = innerWidth; c.height = innerHeight; };
-  W(); addEventListener("resize", W);
+  if (kurangiGerak) return;
+  siapkanKanvas();
   const warna = ["#38BDF8", "#7DD3FC", "#A78BFA", "#BAE6FD", "#F472B6", "#FFFFFF"];
-  const p = Array.from({ length: 140 }, () => ({
+  for (let i = 0; i < 140; i++) _confetti.push({
     x: innerWidth / 2 + (Math.random() - .5) * 220, y: innerHeight * .62,
     vx: (Math.random() - .5) * 11, vy: -Math.random() * 15 - 5,
     s: Math.random() * 7 + 3, r: Math.random() * 6.3, vr: (Math.random() - .5) * .3,
-    c: warna[(Math.random() * warna.length) | 0], a: 1,
-  }));
-  let t = 0;
-  (function loop() {
-    x.clearRect(0, 0, c.width, c.height);
-    let hidup = false;
-    p.forEach(o => {
-      o.vy += .34; o.x += o.vx; o.y += o.vy; o.r += o.vr;
-      if (t > 90) o.a -= .016;
-      if (o.a > 0 && o.y < c.height + 60) {
-        hidup = true;
-        x.save(); x.globalAlpha = Math.max(0, o.a); x.translate(o.x, o.y); x.rotate(o.r);
-        x.fillStyle = o.c; x.fillRect(-o.s / 2, -o.s / 2, o.s, o.s * .62); x.restore();
-      }
-    });
-    t++;
-    if (hidup) requestAnimationFrame(loop); else x.clearRect(0, 0, c.width, c.height);
-  })();
+    c: warna[(Math.random() * warna.length) | 0], a: 1, umur: 0,
+  });
+  mulaiLoop();
 }
 
 /* ================= LATAR: BINTANG + PARALAKS ================= */
